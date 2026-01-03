@@ -1,11 +1,15 @@
 import subprocess
 
 def scan_wifi_networks():
-    out = subprocess.check_output(
-        ["netsh", "wlan", "show", "networks", "mode=bssid"],
-        encoding="utf-8",
-        errors="ignore"
-    )
+    #  Тут я добавил try-except, потому что не на всех системах есть netsh (смотри main.py)
+    try:
+        out = subprocess.check_output(
+            ["netsh", "wlan", "show", "networks", "mode=bssid"],
+            encoding="utf-8",
+            errors="ignore"
+        )
+    except FileNotFoundError:
+        return
     nets = []
     current = {}
     for line in out.splitlines():

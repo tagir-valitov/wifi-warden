@@ -15,7 +15,9 @@ def monitor_gateway():
             gateway_changes += 1
 
         last_gateway = current
-        time.sleep(10)
+        time.sleep(1)  # У нас 15 секунд программа работает. За это время надо
+        #  набрать 4 смены шлюза или больше. Тут было sleep(10), больше 1
+        #  смены не было бы никогда
 
 def is_gateway_unstable():
     return gateway_changes > 3
